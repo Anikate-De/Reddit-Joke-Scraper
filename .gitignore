@@ -1,2 +1,5 @@
 # VS CODE related
 .vscode/
+
+# Environment Variables and Secrets
+.env
