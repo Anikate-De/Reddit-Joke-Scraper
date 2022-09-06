@@ -19,7 +19,17 @@ print(reddit.auth.url(scopes=["identity"], state="...", duration="permanent"))
 
 reddit.read_only = True
 
-submission = reddit.subreddit('DadJokes').random()
+while True:
 
-print(submission.title)
-print(submission.selftext)
+    submission = reddit.subreddit('DadJokes').random()
+
+    print(submission.title)
+    print(submission.selftext)
+    print()
+
+    print('NSFW', submission.over_18)
+    print('Upvotes', submission.score)
+    print('ID', submission.id)
+    print()
+
+    input('Enter to get to next joke _')
