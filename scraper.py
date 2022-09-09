@@ -137,10 +137,15 @@ def loopThroughSubmissions(dataList):
                             "setup": submission.title,
                             "punchline": submission.selftext,
                         }
-                        basics.update(editTags())
+                        # basics.update(editTags())
                         dataList += [
-                            basics
+                            {
+                                "rID": submission.id,
+                                "setup": submission.title,
+                                "punchline": submission.selftext,
+                            } | editTags()
                         ]
+                        print()
                         print(colored(text='Added with custom tags',
                                       color='green', attrs=['bold']))
                         print()
