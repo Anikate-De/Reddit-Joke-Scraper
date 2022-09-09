@@ -168,7 +168,7 @@ def loopThroughSubmissions(dataList):
                         break
                     case _:
                         print(
-                            colored(text="Invalid input, please enter one of the following (a, e, q)", color="red"))
+                            colored(text="Invalid input, please enter one of (A, a, e, s, q)", color="red"))
 
 
 # Use ctypes to enable ANSI codes in a terminal
