@@ -21,15 +21,16 @@ reddit.read_only = True
 
 while True:
 
-    submission = reddit.subreddit('DadJokes').random()
+    submissions = reddit.subreddit('DadJokes').top(limit = float('inf'))
 
-    print(submission.title)
-    print(submission.selftext)
-    print()
+    for submission in submissions:
+        print(submission.title)
+        print(submission.selftext)
+        print()
 
-    print('NSFW', submission.over_18)
-    print('Upvotes', submission.score)
-    print('ID', submission.id)
-    print()
+        print('NSFW', submission.over_18)
+        print('Upvotes', submission.score)
+        print('ID', submission.id)
+        print()
 
-    input('Enter to get to next joke _')
+        input('Enter to get to next joke _')
