@@ -45,7 +45,7 @@ def loopThroughSubmissions(dataList):
     for submission in submissions:
 
         for obj in dataList:
-            if obj['id'] == submission.id:
+            if obj['rID'] == submission.id:
                 break
         else:
             if submission.over_18:
@@ -68,7 +68,7 @@ def loopThroughSubmissions(dataList):
                 # Remove the input line with the below ANSI codes
                 removePrevLn(2)
 
-                match choice.lower():
+                match choice:
                     case 'q':
                         choice = input(
                             f'The data will be saved, confirm quit? {colored(text="[y/n]", color="yellow", attrs=["bold"])} ')
@@ -83,24 +83,41 @@ def loopThroughSubmissions(dataList):
                             print(colored(text='Saved',
                                           color='green', attrs=['bold']))
                             return
-                    case 'a':
+
+                    # Lets the user add the joke to the save-list
+                    case 'A':
 
                         # Execute addition logic here
                         dataList += [{
-                            "id": submission.id,
+                            "rID": submission.id,
                             "setup": submission.title,
-                            "punchline": submission.selftext
-                        },]
+                            "punchline": submission.selftext,
+                            "flags": {
+                                "religious": False,
+                                "sexist": False,
+                                "racist": False,
+                                "explicit": False,
+                                "political": False,
+                                "nsfw": False
+                            },
+                            "safe": True
+                        }]
 
                         print('Added')
                         print()
                         break
-                    case 'e':
+
+                    # Lets the user add a joke after editing tags [only]
+                    case 'a':
+                        print('Added after editing tags')
+                        print()
+                        break
+                    case 'e' | 'E':
                         # Add editing logic here
                         print('Edited')
                         print()
                         break
-                    case 's':
+                    case 's' | 'S':
                         # Add skippinig logic here
                         print('Skipped')
                         print()
