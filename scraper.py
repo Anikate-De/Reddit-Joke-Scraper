@@ -41,6 +41,20 @@ def removePrevLn(n=1):
         print('\033[1A' + '\033[K', end='')
 
 
+def editTags():
+    return {
+        "flags": {
+            "religious": input('Religious: (False) ') != "",
+            "sexist": input('Sexist: (False) ') != "",
+            "racist": input('Racist: (False) ') != "",
+            "explicit": input('Explicit: (False) ') != "",
+            "political": input('Political: (False) ') != "",
+            "nsfw": input('NSFW: (False) ') != ""
+        },
+        "safe": input('SAFE: (true) ') == ""
+    }
+
+
 def loopThroughSubmissions(dataList):
     for submission in submissions:
 
@@ -78,7 +92,7 @@ def loopThroughSubmissions(dataList):
                             id = 0
                             for obj in dataList:
                                 obj['id'] = id
-                                id +=1
+                                id += 1
 
                             # Execute saving logic here
                             with open('data/data.json', 'w') as file:
@@ -109,13 +123,26 @@ def loopThroughSubmissions(dataList):
                             "safe": True
                         }]
 
-                        print('Added')
+                        print(colored(text='Added',
+                                      color='green', attrs=['bold']))
                         print()
                         break
 
                     # Lets the user add a joke after editing tags [only]
                     case 'a':
-                        print('Added after editing tags')
+                        print(
+                            'Edit the tags below, their default values are present in parenthesis - ')
+                        basics = {
+                            "rID": submission.id,
+                            "setup": submission.title,
+                            "punchline": submission.selftext,
+                        }
+                        basics.update(editTags())
+                        dataList += [
+                            basics
+                        ]
+                        print(colored(text='Added with custom tags',
+                                      color='green', attrs=['bold']))
                         print()
                         break
                     case 'e' | 'E':
