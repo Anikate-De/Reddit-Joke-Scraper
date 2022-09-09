@@ -132,12 +132,6 @@ def loopThroughSubmissions(dataList):
                     case 'a':
                         print(
                             'Edit the tags below, their default values are present in parenthesis - ')
-                        basics = {
-                            "rID": submission.id,
-                            "setup": submission.title,
-                            "punchline": submission.selftext,
-                        }
-                        # basics.update(editTags())
                         dataList += [
                             {
                                 "rID": submission.id,
@@ -151,8 +145,20 @@ def loopThroughSubmissions(dataList):
                         print()
                         break
                     case 'e' | 'E':
-                        # Add editing logic here
-                        print('Edited')
+                        print(
+                            'Edit the joke below, their default values, if available, are present in parenthesis - ')
+                        setup = input('Setup: (Default Title) ')
+                        punchline = input('Punchline: (Default Desc) ')
+                        dataList += [
+                            {
+                                "rID": submission.id,
+                                "setup": submission.title if setup == '' else setup,
+                                "punchline": submission.selftext if punchline == '' else punchline,
+                            } | editTags()
+                        ]
+                        print()
+                        print(colored(text='Edited',
+                                      color='yellow', attrs=['bold']))
                         print()
                         break
                     case 's' | 'S':
