@@ -1,18 +1,18 @@
 import os
-from dotenv import load_dotenv
+
 import praw
+from dotenv import load_dotenv
 
 load_dotenv()
 
-# Get env var by using -
-# os.getenv('ENV NAME')
+# Get env var by using - os.getenv('ENV NAME')
 
-reddit = praw.Reddit(client_id=os.getenv('CLIENT_ID'),      # your client id
+reddit = praw.Reddit(client_id=os.getenv('CLIENT_ID'),
                      client_secret=os.getenv(
-                         'CLIENT_SECRET'),  # your client secret
-                     user_agent=os.getenv('USERAGENT'),  # user agent name
+                         'CLIENT_SECRET'),
+                     user_agent=os.getenv('USERAGENT'),
                      username=os.getenv('USERNAME'),
-                     redirect_uri="http://localhost:8080",    # your reddit username
+                     redirect_uri=os.getenv('REDIRECT_URL'),
                      password=os.getenv('PASSWORD'))
 
 print(reddit.auth.url(scopes=["identity"], state="...", duration="permanent"))
