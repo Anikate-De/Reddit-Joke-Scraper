@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 from termcolor import colored
 
 
+def removePrevLn(n=1):
+    for i in range(n):
+        print('\033[1A' + '\033[K', end='')
+
+
 def loopThroughSubmissions():
     for submission in submissions:
 
@@ -22,23 +27,23 @@ def loopThroughSubmissions():
         print('ID', submission.id, end='\n\n\n')
 
         while True:
-            
+
             choice = input(colored(text='waiting for input... ',
                                    color='cyan', attrs=['bold']))
 
             # Remove the input line with the below ANSI codes
-            print('\033[1A' + '\033[K', end='')
-            print('\033[1A' + '\033[K', end='')
+            removePrevLn(2)
 
             match choice.lower():
                 case 'q':
-                    cho = input(
+                    choice = input(
                         f'The data will be saved, confirm quit? {colored(text="[y/n]", color="yellow", attrs=["bold"])} ')
-                    if cho.lower() == 'y':
+                    if choice.lower() == 'y':
                         print('Saving, please wait...')
                         # Execute saving logic here
-                        print('\033[1A' + '\033[K', end='')
-                        print('Saved')
+                        removePrevLn(2)
+                        print(colored(text='Saved',
+                              color='green', attrs=['bold']))
                         return
                 case 'a':
                     # Execute addition logic here
@@ -51,8 +56,8 @@ def loopThroughSubmissions():
                     print()
                     break
                 case _:
-                    print('Invalid input, please enter one of the following (q, a, e)')
-            
+                    print(
+                        colored(text="Invalid input, please enter one of the following (a, e, q)", color="red"))
 
 
 # Use ctypes to enable ANSI codes in a terminal
