@@ -74,19 +74,35 @@ def loopThroughSubmissions(dataList):
                             f'The data will be saved, confirm quit? {colored(text="[y/n]", color="yellow", attrs=["bold"])} ')
                         if choice.lower() == 'y':
                             print('Saving, please wait...')
+
                             # Execute saving logic here
+                            with open('data/data.json', 'w') as file:
+                                json.dump(dataList, file)
+
                             removePrevLn(2)
                             print(colored(text='Saved',
                                           color='green', attrs=['bold']))
                             return
                     case 'a':
+
                         # Execute addition logic here
+                        dataList += [{
+                            "id": submission.id,
+                            "setup": submission.title,
+                            "punchline": submission.selftext
+                        },]
+
                         print('Added')
                         print()
                         break
                     case 'e':
                         # Add editing logic here
                         print('Edited')
+                        print()
+                        break
+                    case 's':
+                        # Add skippinig logic here
+                        print('Skipped')
                         print()
                         break
                     case _:
