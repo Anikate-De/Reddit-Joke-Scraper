@@ -75,9 +75,15 @@ def loopThroughSubmissions(dataList):
                         if choice.lower() == 'y':
                             print('Saving, please wait...')
 
+                            id = 0
+                            for obj in dataList:
+                                obj['id'] = id
+                                id +=1
+
                             # Execute saving logic here
                             with open('data/data.json', 'w') as file:
-                                json.dump(dataList, file)
+                                json.dump(dataList, file,
+                                          indent=4, sort_keys=True)
 
                             removePrevLn(2)
                             print(colored(text='Saved',
