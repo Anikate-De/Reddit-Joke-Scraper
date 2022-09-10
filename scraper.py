@@ -36,6 +36,30 @@ def loadDataFromJSON():
     file.close()
 
 
+def loadDataFromSkipped():
+
+    global skippedData
+
+    path = 'data/skipped.txt'
+
+    # create a directory and a data file if it does not exist
+    if (not os.path.exists(path)):
+        try:
+            os.mkdir('data')
+        except:
+            pass
+        file = open(path, 'w')
+        file.close()
+        loadDataFromSkipped()
+        return
+    else:
+        file = open(path, 'r+')
+
+    file.seek(0)
+    skippedData = file.read().splitlines()
+    file.close()
+
+
 def removePrevLn(n=1):
     for i in range(n):
         print('\033[1A' + '\033[K', end='')
@@ -55,8 +79,11 @@ def editTags():
     }
 
 
-def loopThroughSubmissions(dataList):
+def loopThroughSubmissions(dataList, skippedList):
     for submission in submissions:
+
+        if submission.id in skippedList:
+            continue
 
         for obj in dataList:
             if obj['rID'] == submission.id:
@@ -83,7 +110,7 @@ def loopThroughSubmissions(dataList):
                 removePrevLn(2)
 
                 match choice:
-                    case 'q':
+                    case 'q' | 'Q':
                         choice = input(
                             f'The data will be saved, confirm quit? {colored(text="[y/n]", color="yellow", attrs=["bold"])} ')
                         if choice.lower() == 'y':
@@ -98,6 +125,9 @@ def loopThroughSubmissions(dataList):
                             with open('data/data.json', 'w') as file:
                                 json.dump(dataList, file,
                                           indent=4, sort_keys=True)
+
+                            with open('data/skipped.txt', 'w') as skipped:
+                                skipped.writelines(skippedList)
 
                             removePrevLn(2)
                             print(colored(text='Saved',
@@ -162,7 +192,7 @@ def loopThroughSubmissions(dataList):
                         print()
                         break
                     case 's' | 'S':
-                        # Add skippinig logic here
+                        skippedList += [submission.id]
                         print('Skipped')
                         print()
                         break
@@ -196,7 +226,9 @@ submissions = reddit.subreddit('DadJokes').top(limit=float('inf'))
 
 
 jsonData = []
+skippedData = []
 
 loadDataFromJSON()
+loadDataFromSkipped()
 
-loopThroughSubmissions(jsonData)
+loopThroughSubmissions(jsonData, skippedData)
