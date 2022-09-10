@@ -1,3 +1,3 @@
-pip install praw
-pip install python-dotenv
-pip install termcolor
+praw==7.6.0
+python-dotenv==0.21.0
+termcolor==1.1.0
