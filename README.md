@@ -38,7 +38,7 @@ Clone this repository and head to the \`Steps to Follow section\` to get started
 
 ### Steps to Follow
 
-- Create an Application, & get the credetentials from your [Reddit Developer Account]()
+- Create an Application, & get the credetentials from your [Reddit Developer Account](https://old.reddit.com/prefs/apps/)
     
     > for URL, you may put `http://localhost:8080`
 
