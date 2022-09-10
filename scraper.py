@@ -34,6 +34,7 @@ def loadDataFromJSON():
     file.seek(0)
     jsonData = json.load(file)
     file.close()
+    print(colored('Loaded Data Modules', color='green'))
 
 
 def loadDataFromSkipped():
@@ -58,6 +59,39 @@ def loadDataFromSkipped():
     file.seek(0)
     skippedData = file.read().splitlines()
     file.close()
+    print(colored('Loaded Skipped Data Modules', color='green'))
+
+
+def displayIntroductoryMSG():
+    print(colored('\nREDDIT JOKE SCRAPER\n', color='red', attrs=['bold']))
+
+    print('Current Joke Save type -',
+          colored('Two-line (Setup & Punchline)', color="cyan"))
+    print('Current Data Save Type <Saved Jokes, Skipped Jokes>',
+          colored('<JSON, TXT>', color="cyan"))
+    print()
+
+    print(colored('\nHow to Use - \n', color='yellow', attrs=['bold']))
+
+    print('Use the following keys to operate this tool -')
+    print(colored('a', color='green', attrs=[
+          'bold']), 'Add after editing tags')
+    print(colored('A', color='green', attrs=[
+          'bold']), 'Forced Add (no editing)')
+    print(colored('e or E', color='green', attrs=[
+          'bold']), 'Add after editing content (tags + title + desc)')
+    print(colored('s or S', color='green', attrs=['bold']), 'Skip')
+    print(colored('q or Q', color='green', attrs=['bold']), 'Save Data & Quit')
+
+    print()
+    print(colored('\nPLEASE DON\'T HIT CTRL+C TO EXIT OUT OF THIS PROGRAM. IT WON\'T SAVE THE SESSION\'S DATA. USE THE Q KEY\n',
+          color='red', attrs=['bold']))
+    print('It is recommended to not extend any session beyond 100 jokes without saving the data. Do a quit and restart\n')
+
+    input(colored('Press ENTER | RETURN to continue ', color="cyan"))
+    print()
+    print(colored('--------------------', color="yellow"))
+    print()
 
 
 def removePrevLn(n=1):
@@ -230,5 +264,7 @@ skippedData = []
 
 loadDataFromJSON()
 loadDataFromSkipped()
+
+displayIntroductoryMSG()
 
 loopThroughSubmissions(jsonData, skippedData)
