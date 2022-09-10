@@ -127,7 +127,7 @@ def loopThroughSubmissions(dataList, skippedList):
                                           indent=4, sort_keys=True)
 
                             with open('data/skipped.txt', 'w') as skipped:
-                                skipped.writelines(skippedList)
+                                skipped.write('\n'.join(skippedList) + '\n')
 
                             removePrevLn(2)
                             print(colored(text='Saved',
