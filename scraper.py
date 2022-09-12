@@ -150,7 +150,7 @@ def loopThroughSubmissions(dataList, skippedList):
                         if choice.lower() == 'y':
                             print('Saving, please wait...')
 
-                            id = 0
+                            id = 1
                             for obj in dataList:
                                 obj['id'] = id
                                 id += 1
